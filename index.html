@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Day Trade Indicator Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>Day Trade Indicator Tracker</h1>
+    <p class="subtitle">
+      Enter stock tickers to score same-day momentum setups using common technical indicators.
+      <strong>Educational only, not financial advice.</strong>
+    </p>
+
+    <section class="panel">
+      <h2>Watchlist Input</h2>
+      <label for="tickers">Tickers (comma-separated, e.g. AAPL,MSFT,NVDA)</label>
+      <textarea id="tickers" rows="3" placeholder="AAPL,MSFT,NVDA,AMD,TSLA"></textarea>
+      <div class="actions">
+        <button id="analyzeBtn">Analyze Watchlist</button>
+      </div>
+      <p class="hint">
+        Data source: Yahoo Finance chart API (intraday candles). If a ticker fails, it will be skipped.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>Buy Candidates (Highest Score First)</h2>
+      <table id="resultsTable">
+        <thead>
+          <tr>
+            <th>Ticker</th>
+            <th>Score</th>
+            <th>Signal</th>
+            <th>Price</th>
+            <th>RSI</th>
+            <th>MACD</th>
+            <th>EMA Trend</th>
+            <th>VWAP</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="8">No analysis yet.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>How score is calculated</h2>
+      <ul>
+        <li>+25 if RSI is between 45 and 65 (momentum without being too extended).</li>
+        <li>+30 if MACD line is above signal line (bullish momentum).</li>
+        <li>+25 if short EMA (9) is above long EMA (21) (uptrend confirmation).</li>
+        <li>+20 if last price is above session VWAP (intraday strength).</li>
+      </ul>
+      <p class="disclaimer">
+        This tool is for research and learning only. Markets are risky. Always do your own due diligence.
+      </p>
+    </section>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
