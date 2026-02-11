@@ -4,6 +4,7 @@ This repository includes:
 
 1. A browser app to score a custom watchlist with intraday indicators.
 2. A Python scanner to sweep U.S. stocks for **weekly growth** indicators.
+3. A Windows desktop wrapper that can be built into a `.exe`.
 
 ## 1) Browser app (watchlist analyzer)
 
@@ -35,20 +36,9 @@ Then open:
 http://localhost:4173
 ```
 
-## 2) Weekly growth market scanner
+## 2) Weekly growth market scanner (CLI)
 
 Use `scan_weekly_growth.py` to scan many U.S.-listed symbols and rank likely weekly momentum candidates.
-
-### What it scans
-
-- U.S. symbol universe from Nasdaq Trader symbol directories (or a local symbol file)
-- Daily candles (6 months) from Yahoo Finance chart API
-- Indicator rules:
-  - Positive 1-week return (stronger score at >= 2%)
-  - Close > EMA20 > EMA50
-  - RSI(14) in 50–75
-  - MACD above signal
-  - Latest volume >= 1.2x 20-day average
 
 ### Run scanner
 
@@ -68,6 +58,32 @@ Offline/CI fixture mode (no network):
 
 ```bash
 python3 scan_weekly_growth.py --symbols-file fixtures/symbols.txt --fixture-dir fixtures/yahoo --top 20 --csv weekly_growth_sample.csv
+```
+
+## 3) Windows `.exe` desktop app
+
+The file `windows_stock_scanner_app.py` is a desktop GUI wrapper around the scanner.
+
+### Build EXE on Windows
+
+1. Open **Command Prompt** in this repo folder.
+2. Run:
+
+```bat
+build_windows_exe.bat
+```
+
+This creates:
+
+```text
+dist\WeeklyGrowthScanner.exe
+```
+
+### Manual build command (alternative)
+
+```bat
+python -m pip install -r windows_requirements.txt
+pyinstaller --noconfirm --clean --onefile --windowed --name WeeklyGrowthScanner windows_stock_scanner_app.py
 ```
 
 ## Important disclaimer
