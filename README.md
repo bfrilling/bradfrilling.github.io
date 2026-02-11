@@ -89,3 +89,26 @@ pyinstaller --noconfirm --clean --onefile --windowed --name WeeklyGrowthScanner 
 ## Important disclaimer
 
 This project is for **education and research** only and is **not financial advice**. Indicator signals can fail, data can be delayed or incomplete, and markets are risky.
+
+
+## 4) Windows `.exe` downloader app
+
+If you want to distribute only a downloader, use `windows_exe_downloader.py`.
+It lets users paste a direct EXE URL, download, and save locally.
+
+### Build downloader EXE on Windows
+
+```bat
+build_windows_downloader_exe.bat
+```
+
+Output:
+
+```text
+dist\WeeklyGrowthScannerDownloader.exe
+```
+
+### Set your real EXE URL
+
+Edit `DEFAULT_EXE_URL` in `windows_exe_downloader.py` and point it to your hosted EXE
+(for example, a GitHub Releases direct asset URL).
